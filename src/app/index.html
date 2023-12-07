@@ -1,16 +1,40 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <link rel="stylesheet" href="mypage.css">
+    </head>
     <body>
         <div id="app"></div>
-        <script type="text/javascript">
+        <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="components.js" type="text/jsx"></script>
+        <script src="mypage.js" type="text/jsx"></script>
+
+        <script type="text/jsx">
             const app = document.getElementById('app');
-            const header = document.createElement('h1');
-            const text = 'some text for tha site!';
-            const headerContent = document.createTextNode(text);
-            
-            header.appendChild(headerContent);
-            app.appendChild(header);
+            ReactDOM.render(<MyPage />, app);
         </script>
+
+        <!-- <script type="text/jsx">
+            const app = document.getElementById('app');
+
+            function Header() {
+                return <h1>Hello World!</h1>;
+            }
+
+            function HomePage() {
+                return (
+                    <div>
+                        <Header />
+                        <h3> hehehe </h3>
+                        <EntryList />
+                    </div>
+                );
+            }
+
+            ReactDOM.render(<HomePage />, app);
+        </script> -->
 
     </body>
 </html>
