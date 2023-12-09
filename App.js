@@ -2,18 +2,38 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import ImageViewer from './components/ImageViewer';
 import Button from './components/Button';
+import Animated, {useAnimatedStyle, useSharedValue, withSpring} from 'react-native-reanimated';
 
 const PlaceholderImage = require('./assets/icon.png');
 
 export default function App() {
+
+  const translateY = useSharedValue(0);
+
+  const moveUp = () => {
+    translateY.value -= 10;
+  }
+  const moveDown = () => {
+    translateY.value += 10;
+  }
+
+  const animatedStyles = useAnimatedStyle(() =>({
+    transform: [{ translateY: withSpring(translateY.value * 10)}],
+  }));
+
+
+
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
+      <Animated.View style={[styles.imageContainer, animatedStyles]}>
         <ImageViewer imgSource={PlaceholderImage}/>
-      </View>
+      </Animated.View>
+
+      {/* <Animated.View style={[styles.animBox, animatedStyles]} /> */}
+
       <View style={styles.footerContainer}>
-        <Button label="Choose a photo"/>
-        <Button label="Use this photo"/>
+        <Button label="move up" onPress={ moveUp }/>
+        <Button label="move down" onPress={ moveDown }/>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -37,4 +57,9 @@ const styles = StyleSheet.create({
   title: {
     color: '#fff',
   },
+  animBox: {
+    backgroundColor: '#fff',
+    width: 100,
+    height: 100,
+  }
 });
