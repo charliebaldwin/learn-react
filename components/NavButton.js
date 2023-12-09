@@ -1,10 +1,18 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
 
-export default function Button ( {label, onPress} ) {
+export default function NavButton ( {label, onPress, targetValue, yPos} ) {
+
+    const setScrollerY = (targetValue) => {
+        targetValue.value = yPos;
+    }
 
     return (
         <View style={styles.buttonContainer}>
-            <Pressable style={styles.button} onPress={onPress}>
+            <Pressable style={styles.button} onPress={
+                () => {
+                    setScrollerY(targetValue);
+                }
+            }>
                 <Text style={styles.buttonLabel}>{label}</Text>
             </Pressable>
         </View>

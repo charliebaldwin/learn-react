@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import ImageViewer from './components/ImageViewer';
+import NavButton from './components/NavButton';
 import Button from './components/Button';
 import ColumnsGroup from './components/Columns';
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withSpring, withTiming} from 'react-native-reanimated';
@@ -36,6 +37,9 @@ export default function App() {
           <Button label="move up" onPress={ moveUp }/>
           <Button label="move down" onPress={ moveDown }/>
         </View>
+
+        <View style={styles.shadowBox}/>
+
         
         <StatusBar style="auto" />
 
@@ -48,12 +52,16 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#25292e',
+    backgroundColor: '#fff',
     alignItems: 'center',
   },
   imageContainer: {
     flex: 1,
     paddingTop: 58,
+    shadowColor:'black',
+    shadowRadius: 0,
+    shadowOffset: {width: 3, height: 3},
+    shadowOpacity: .3,
   },
   footerContainer: {
     flex: 1 / 3,
@@ -66,5 +74,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: 100,
     height: 100,
-  }
+  },
+  shadowBox: {
+    width: 200,
+    height: 200,
+    backgroundColor: 'red',
+    borderRadius: 30,
+    borderCurve: 'continuous',
+    shadowColor:'black',
+    shadowRadius: 0,
+    shadowOffset: {width: 3, height: 3},
+    shadowOpacity: .3,
+  },
 });

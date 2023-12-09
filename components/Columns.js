@@ -13,7 +13,7 @@ export default function ColumnsGroup (props) {
             </View>
 
             <View style={styles.main}>
-                <ScrollView style={styles.scrollgroup}>
+                <ScrollView style={styles.scrollgroup} directionalLockEnabled={true}>
                     {props.children}
                     <View style={{height: 2000}}/>
                 </ScrollView>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         borderColor: '#000',
         borderWidth: 5,
         borderRadius: 20,
+        justifyContent:'center',
     },
     main: {
         width: '80%',
