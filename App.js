@@ -30,7 +30,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ColumnsGroup>
-
+{/* 
         <Animated.View style={[styles.imageContainer, animatedStyles]}>
           <ImageViewer imgSource={PlaceholderImage}/>
         </Animated.View>
@@ -39,9 +39,9 @@ export default function App() {
           <Button label="move up" onPress={ moveUp }/>
           <Button label="move down" onPress={ moveDown }/>
           <Badge bg="secondary"> balls </Badge>
-        </View>
+        </View> */}
 
-        <View style={styles.shadowBox}/>
+        {/* <View style={styles.shadowBox}/> */}
 
         
         <StatusBar style="auto" />

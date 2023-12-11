@@ -31,9 +31,4 @@ const styles = StyleSheet.create({
     buttonIcon: {
         paddingRight: 8,
     },
-    buttonLabel: {
-        color: '#fff',
-        fontSize: 24,
-        fontWeight: 'bold'
-    },
 });

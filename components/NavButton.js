@@ -1,13 +1,14 @@
 import { StyleSheet, View, Pressable, TouchableHighlight, Text } from "react-native";
-import React from "react";
+import * as React from "react";
 import Animated, { useSharedValue } from "react-native-reanimated";
+import { ToggleButton } from "react-native-paper";
+import '../fonts/kanit.css';
 
-export default function NavButton ( {label, onPress, targetValue, yPos} ) {
+export default function NavButton ( {label, onPress, onPressGroup, index, currIndex, targetValue, yPos} ) {
 
     const bgEnabled = useSharedValue(1);
 
     var [enabled, setEnabled] = React.useState(false);
-    
 
     const setScrollerY = (targetValue) => {
         targetValue.value = yPos;
@@ -23,17 +24,19 @@ export default function NavButton ( {label, onPress, targetValue, yPos} ) {
         onPress: () => {
             setScrollerY(targetValue);
             setButtonEnabled();
+            onPressGroup(index);
+
         },
-        style: enabled ? styles.buttonEnabled : styles.buttonDisabled,
+        style: currIndex==index ? styles.buttonEnabled : styles.buttonDisabled,
     }
 
 
 
     return (
         <View style={styles.buttonContainer}>
-            <TouchableHighlight {...buttonProps}>
-                <Text style={[{color: enabled ? 'white' : 'black'}, styles.buttonLabel]}>{label}</Text>
-            </TouchableHighlight>
+            <Pressable {...buttonProps}>
+                <Text style={[{color: currIndex==index ? 'white' : 'black'}, styles.buttonLabel]}>{label}</Text>
+            </Pressable>
         </View>
     ); 
 }
@@ -48,7 +51,11 @@ const styles = StyleSheet.create({
     },
     buttonEnabled: {
         backgroundColor: "#000",
-        borderRadius: 20,
+        borderRadius: 12,
+        shadowOffset: {width:5, height:5},
+        shadowColor: 'black',
+        shadowRadius: 0,
+        shadowOpacity: .5,
         width:'100%',
         height:'100%',
         justifyContent: 'center',
@@ -56,7 +63,6 @@ const styles = StyleSheet.create({
     },
     buttonDisabled: {
         backgroundColor: "#fff",
-        borderRadius: 20,
         width:'100%',
         height:'100%',
         justifyContent: 'center',
@@ -66,8 +72,9 @@ const styles = StyleSheet.create({
         paddingRight: 8,
     },
     buttonLabel: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 28,
+        fontWeight: 600,
         textAlign: 'left',
+        fontFamily: 'Kanit',
     },
 });
