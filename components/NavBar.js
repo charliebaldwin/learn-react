@@ -12,7 +12,7 @@ export default function NavBar (props) {
     }));
 
     const offset = 24;
-    const h = 92;
+    const h = 60;
 
     return (
         <View style={styles.columns}>
@@ -20,11 +20,13 @@ export default function NavBar (props) {
                 <Animated.View style={[styles.scroller, animatedStyles]}/>
             </View>
             <View style={styles.buttonsContainer}>
-                <NavButton label='button' targetValue={translateY} yPos={offset+(h * 0)}/>
-                <NavButton label='button' targetValue={translateY} yPos={offset+(h * 1)}/>
-                <NavButton label='button' targetValue={translateY} yPos={offset+(h * 2)}/>
-                <NavButton label='button' targetValue={translateY} yPos={offset+(h * 3)}/>
-                <NavButton label='button' targetValue={translateY} yPos={offset+(h * 4)}/>
+                <NavButton label='home' targetValue={translateY}        yPos={offset+(h * 0)}/>
+                <NavButton label='shaders' targetValue={translateY}     yPos={offset+(h * 1)}/>
+                <NavButton label='ui design' targetValue={translateY}   yPos={offset+(h * 2)}/>
+                <NavButton label='scripting' targetValue={translateY}   yPos={offset+(h * 3)}/>
+                <NavButton label='roles' targetValue={translateY}       yPos={offset+(h * 4)}/>
+                <NavButton label='about me' targetValue={translateY}    yPos={offset+(h * 5)}/>
+                <NavButton label='contact' targetValue={translateY}     yPos={offset+(h * 6)}/>
             </View>
         </View>
     );

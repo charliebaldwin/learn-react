@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     shadowOpacity: .3,
   },
   footerContainer: {
-    flex: 1 / 3,
     alignItems: 'center',
   },
   title: {
