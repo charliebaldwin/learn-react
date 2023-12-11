@@ -1,14 +1,14 @@
 import React, {useRef, useState, createRef} from 'react'
-import {StyleSheet, View, ScrollView} from 'react-native'
+import {Text, StyleSheet, View, ScrollView} from 'react-native'
 import NavBar from './NavBar'
 import ScrollSection from './ScrollSection'
 import ScrollBar from './ScrollBar'
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withSpring, withTiming} from 'react-native-reanimated';
+import '../fonts/kanit.css';
 
 
 export default function ColumnsGroup (props) {
     
-
     var scrollRef = React.createRef();
 
     var sectionCount = 7;
@@ -17,6 +17,8 @@ export default function ColumnsGroup (props) {
         scrollRef.current.scrollTo({x: 0, y:scrollY, animated:true});
     }
     const [scrollPos, setScrollPos] = useState(0);
+    const [scrollMaxHeight, setScrollMaxHeight] = useState(0);
+    const [scrollVisibleHeight, setScrollVisibleHeight] = useState(0);
 
     return (
         <View style={styles.group}>
@@ -41,19 +43,34 @@ export default function ColumnsGroup (props) {
                 //     {useNativeDriver: false} 
                 // )} 
                 // scrollEventThrottle={16}
+                onContentSizeChanged={height => {
+                    setScrollMaxHeight(height);
+                }}
+                onLayout={({
+                    nativeEvent: {
+                        layout: {height}
+                    }
+                }) => {
+                    setScrollVisibleHeight(height);
+                }}
                 onScroll = {(event) => {
                     setScrollPos(event.nativeEvent.contentOffset.y);
                 } }
                 scrollEventThrottle={16}
                 >
-                    <View style={{height: 200}}/>
-                    <ScrollSection title={'home'}/>
-                    <ScrollSection title={'shaders'}/>
-                    <ScrollSection title={'ui design'}/>
-                    <ScrollSection title={'scripting'}/>
-                    <ScrollSection title={'roles'}/>
-                    <ScrollSection title={'about me'}/>
-                    <ScrollSection title={'contact'}/>
+                    <View style={{height: 100}}/>
+                    <ScrollSection 
+                        title={"hi. I'm Charlie."}
+                        subtitle={"I’m a UI and technical artist making games."}
+                        body={"scroll to see some of my work, or use the sidebar to jump to the section you’re looking for."}
+                        tailSpacing = {100}
+                    />
+                    <ScrollSection subtitle={'shaders'} tailSpacing = {500}/>
+                    <ScrollSection subtitle={'ui design'} tailSpacing = {500}/>
+                    <ScrollSection subtitle={'scripting'} tailSpacing = {500}/>
+                    <ScrollSection subtitle={'roles'} tailSpacing = {500}/>
+                    <ScrollSection subtitle={'about me'} tailSpacing = {500}/>
+                    <ScrollSection subtitle={'contact'} tailSpacing = {500}/>
                     <View style={{height: 500}}/>
                 </ScrollView>
 
@@ -61,7 +78,7 @@ export default function ColumnsGroup (props) {
             </View>
 
             <View style={styles.colSidebar}>
-                <ScrollBar scrollPos={scrollPos}/>
+                <ScrollBar totalHeight={4885} visibleHeight={800} scrollPos={scrollPos}/>
             </View>
         </View>
     );
@@ -92,7 +109,12 @@ const styles = StyleSheet.create({
         flex: 5,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 50,
+        paddingHorizontal: 100,
         borderRadius:30,
     },
+    title: {
+        fontSize: 96,
+        fontWeight: 700,
+        fontFamily:'Kanit',
+    }
 });

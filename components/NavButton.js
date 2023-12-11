@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         paddingRight: 8,
     },
     buttonLabel: {
-        fontSize: 28,
+        fontSize: 32,
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',

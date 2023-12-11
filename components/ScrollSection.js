@@ -3,13 +3,21 @@ import {StyleSheet, View, ScrollView, Text} from 'react-native';
 import '../fonts/kanit.css';
 
 
-export default function ScrollSection ({title, props}) {
+export default function ScrollSection ({title, subtitle, body, tailSpacing, props}) {
     return (
         <View>
-            <Text style={styles.title}>
-                {title}
-                <View style={styles.filler}/>
-            </Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subtitle}>{subtitle}</Text>
+            <View style={{height: 20}}/>
+            <Text style={styles.body}>{body}</Text>
+
+            <View style={{
+                height:tailSpacing,
+                backgroundColor: '#ddd',
+                borderRadius: 20,
+                marginTop: 20,
+                marginBottom: 30,
+            }}/>
         </View>
     );
 }
@@ -19,10 +27,27 @@ const styles = StyleSheet.create({
 
     },
     title: {
-        fontSize: 48,
-        fontWeight: 'bold',
+        fontSize: 96,
+        fontWeight: 700,
         textAlign: 'left',
         fontFamily: 'Kanit',
+        width: '75%',
+    },
+    subtitle: {
+        fontSize: 64,
+        fontWeight: 600,
+        textAlign: 'left',
+        fontFamily: 'Kanit',
+        lineHeight: 60,
+        width: '60%',
+    },
+    body: {
+        fontSize: 32,
+        fontWeight: 400,
+        textAlign: 'left',
+        fontFamily: 'Kanit',
+        lineHeight: 36,
+        width: '55%',
     },
     filler: {
         height: 500,
