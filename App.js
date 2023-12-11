@@ -5,6 +5,8 @@ import NavButton from './components/NavButton';
 import Button from './components/Button';
 import ColumnsGroup from './components/Columns';
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withSpring, withTiming} from 'react-native-reanimated';
+import Badge from 'react-bootstrap/Badge';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const PlaceholderImage = require('./assets/icon.png');
 
@@ -36,6 +38,7 @@ export default function App() {
         <View style={styles.footerContainer}>
           <Button label="move up" onPress={ moveUp }/>
           <Button label="move down" onPress={ moveDown }/>
+          <Badge bg="secondary"> balls </Badge>
         </View>
 
         <View style={styles.shadowBox}/>

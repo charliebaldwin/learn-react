@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
 import NavBar from './NavBar';
+import Col from 'react-bootstrap/Col';
 
 export default function ColumnsGroup (props) {
 
@@ -8,7 +9,7 @@ export default function ColumnsGroup (props) {
     return (
         <View style={styles.group}>
 
-            <View style={styles.sidebar}>
+            {/* <View style={styles.sidebar}>
                 <NavBar/>
             </View>
 
@@ -17,8 +18,17 @@ export default function ColumnsGroup (props) {
                     {props.children}
                     <View style={{height: 2000}}/>
                 </ScrollView>
-            </View>
+            </View> */}
 
+            <Col xs={2}>
+                <NavBar/>
+            </Col>
+            <Col>
+                <ScrollView style={styles.scrollgroup} directionalLockEnabled={true}>
+                    {props.children}
+                    <View style={{height: 2000}}/>
+                </ScrollView>
+            </Col>
         </View>
     );
 
@@ -37,14 +47,15 @@ const styles = StyleSheet.create({
         padding: 100,
     },
     sidebar: {
-        width: '20%',
+        width: '2vw',
+        flex: 1,
         borderColor: '#000',
         borderWidth: 5,
         borderRadius: 20,
         justifyContent:'center',
     },
     main: {
-        width: '80%',
+        flex: 1,
         borderColor: '#000',
         borderWidth: 5,
         borderRadius: 20,
