@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     buttonEnabled: {
         backgroundColor: "#000",
         borderRadius: 12,
-        shadowOffset: {width:5, height:5},
+        shadowOffset: {width:4, height:3},
         shadowColor: 'black',
         shadowRadius: 0,
         shadowOpacity: .5,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         paddingRight: 8,
     },
     buttonLabel: {
-        fontSize: 32,
+        fontSize: '1.5vw',
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',

@@ -50,15 +50,25 @@ export default function NavBar ({onNavClicked}) {
 const styles = StyleSheet.create({
     columns: {
         flexDirection:'row',
+        backgroundColor: '#fff',
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
+
     },
     scrollerContainer: {
         flex:1,
+        alignItems: 'flex-end'
     },
     scroller: {
         height: 47,
+        width: 50,
         borderTopRightRadius: 12,
         borderBottomRightRadius: 12,
         backgroundColor: '#000',
+        shadowOffset: {width:4, height: 3},
+        shadowColor: 'black',
+        shadowRadius: 0,
+        shadowOpacity: .5,
     },
     buttonsContainer: {
         justifyContent:'left',

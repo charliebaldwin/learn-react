@@ -17,8 +17,8 @@ export default function ColumnsGroup (props) {
         scrollRef.current.scrollTo({x: 0, y:scrollY, animated:true});
     }
     const [scrollPos, setScrollPos] = useState(0);
-    const [scrollMaxHeight, setScrollMaxHeight] = useState(0);
-    const [scrollVisibleHeight, setScrollVisibleHeight] = useState(0);
+    var [scrollMaxHeight, setScrollMaxHeight] = useState(0);
+    var [scrollVisibleHeight, setScrollVisibleHeight] = useState(0);
 
     return (
         <View style={styles.group}>
@@ -58,27 +58,34 @@ export default function ColumnsGroup (props) {
                 } }
                 scrollEventThrottle={16}
                 >
-                    <View style={{height: 100}}/>
-                    <ScrollSection 
-                        title={"hi. I'm Charlie."}
-                        subtitle={"I’m a UI and technical artist making games."}
-                        body={"scroll to see some of my work, or use the sidebar to jump to the section you’re looking for."}
-                        tailSpacing = {100}
-                    />
-                    <ScrollSection subtitle={'shaders'} tailSpacing = {500}/>
-                    <ScrollSection subtitle={'ui design'} tailSpacing = {500}/>
-                    <ScrollSection subtitle={'scripting'} tailSpacing = {500}/>
-                    <ScrollSection subtitle={'roles'} tailSpacing = {500}/>
-                    <ScrollSection subtitle={'about me'} tailSpacing = {500}/>
-                    <ScrollSection subtitle={'contact'} tailSpacing = {500}/>
-                    <View style={{height: 500}}/>
+                    <View onLayout={({
+                        nativeEvent: {
+                            layout: {height}
+                        }
+                    }) => {
+                        setScrollMaxHeight(height);
+                    }}>
+                        <View style={{height: 100}}/>
+                        <ScrollSection 
+                            title={"hi. I'm Charlie."}
+                            subtitle={"I’m a UI and technical artist making games."}
+                            body={"scroll to see some of my work, or use the sidebar to jump to the section you’re looking for."}
+                            tailSpacing = {160}
+                        />
+                        <ScrollSection subtitle={'shaders'} tailSpacing = {500}/>
+                        <ScrollSection subtitle={'ui design'} tailSpacing = {500}/>
+                        <ScrollSection subtitle={'scripting'} tailSpacing = {500}/>
+                        <ScrollSection subtitle={'roles'} tailSpacing = {500}/>
+                        <ScrollSection subtitle={'about me'} tailSpacing = {500}/>
+                        <ScrollSection subtitle={'contact'} tailSpacing = {500}/>
+                    </View>
                 </ScrollView>
 
                 
             </View>
 
             <View style={styles.colSidebar}>
-                <ScrollBar totalHeight={4885} visibleHeight={800} scrollPos={scrollPos}/>
+                <ScrollBar totalHeight={scrollMaxHeight} visibleHeight={scrollVisibleHeight} scrollPos={scrollPos}/>
             </View>
         </View>
     );
@@ -92,10 +99,11 @@ const styles = StyleSheet.create({
         height: '100%',
         flexDirection: 'row',
         alignItems: 'stretch',
+        backgroundColor: '#ff42b0'
         
     },
     scrollgroup: {
-        height: 800,
+        height: '100vh',
         padding: 0,
         width: '80%',
         borderRadius: 20,

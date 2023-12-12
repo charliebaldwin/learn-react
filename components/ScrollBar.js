@@ -5,16 +5,13 @@ import Animated, {useAnimatedStyle, useSharedValue, Easing, withSpring, withTimi
 
 export default function ScrollBar ({totalHeight, visibleHeight, scrollPos}) {
 
-    const barFrameSize = 600;
+    const barFrameSize = visibleHeight - 200;
 
-    const [totalSize, setTotalSize] = useState(totalHeight);
-    const [visibleSize, setVisibleSize] = useState(visibleHeight);
-
-    const calcBarSize = (visibleSize / totalSize) * barFrameSize;
+    var calcBarSize = (visibleHeight / totalHeight) * barFrameSize;
 
 
-    const sharedPos = useSharedValue();
-    sharedPos.value = (scrollPos / totalSize) * barFrameSize;
+    const sharedPos = useSharedValue(0);
+    sharedPos.value = (scrollPos / totalHeight) * barFrameSize;
     const animatedStyles = useAnimatedStyle(() =>({
         transform: [{ translateY: withTiming(sharedPos.value, {duration: 100, easing: Easing.out(Easing.poly(6))})}],
       }));

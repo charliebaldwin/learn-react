@@ -17,6 +17,9 @@ export default function ScrollSection ({title, subtitle, body, tailSpacing, prop
                 borderRadius: 20,
                 marginTop: 20,
                 marginBottom: 30,
+                marginLeft: 20,
+                marginRight: 20,
+                
             }}/>
         </View>
     );
