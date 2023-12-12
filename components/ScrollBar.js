@@ -5,7 +5,7 @@ import Animated, {useAnimatedStyle, useSharedValue, Easing, withSpring, withTimi
 
 export default function ScrollBar ({totalHeight, visibleHeight, scrollPos}) {
 
-    const barFrameSize = visibleHeight - 200;
+    const barFrameSize = visibleHeight - 300;
 
     var calcBarSize = (visibleHeight / totalHeight) * barFrameSize;
 
@@ -19,8 +19,8 @@ export default function ScrollBar ({totalHeight, visibleHeight, scrollPos}) {
     return (
         <View style={{
             backgroundColor: '#ddd',
-            width: 20,
-            height: barFrameSize,
+            width: 16,
+            flexBasis: barFrameSize,
             borderRadius:10,
         }}>
             <Animated.View style={[{
@@ -34,12 +34,3 @@ export default function ScrollBar ({totalHeight, visibleHeight, scrollPos}) {
     );
 
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#ddd',
-        width: 20,
-        height: '100%',
-        borderRadius:10,
-    },
-});

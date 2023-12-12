@@ -30,22 +30,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ColumnsGroup>
-{/* 
-        <Animated.View style={[styles.imageContainer, animatedStyles]}>
-          <ImageViewer imgSource={PlaceholderImage}/>
-        </Animated.View>
-
-        <View style={styles.footerContainer}>
-          <Button label="move up" onPress={ moveUp }/>
-          <Button label="move down" onPress={ moveDown }/>
-          <Badge bg="secondary"> balls </Badge>
-        </View> */}
-
-        {/* <View style={styles.shadowBox}/> */}
-
-        
         <StatusBar style="auto" />
-
       </ColumnsGroup>
     </View>
   );

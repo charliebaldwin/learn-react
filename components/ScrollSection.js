@@ -1,15 +1,18 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
 import '../fonts/kanit.css';
+import SectionContact from './SectionContact'
 
 
-export default function ScrollSection ({title, subtitle, body, tailSpacing, props}) {
+export default function ScrollSection ({title, subtitle, body, tailSpacing}, props) {
     return (
         <View>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subtitle}>{subtitle}</Text>
             <View style={{height: 20}}/>
             <Text style={styles.body}>{body}</Text>
+
+            {props.children}
 
             <View style={{
                 height:tailSpacing,

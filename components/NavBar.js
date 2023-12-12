@@ -12,9 +12,8 @@ export default function NavBar ({onNavClicked}) {
     const [currIndex, setCurrIndex] = React.useState(0);
 
     const translateY = useSharedValue(offset);
-    const setTranslateY = (y) => {
-        translateY.value = y;
-    }
+    var oldY = offset;
+
     const onAnyClicked = (aButton) => {
         setCurrIndex(aButton);
         onNavClicked(aButton);
@@ -22,9 +21,9 @@ export default function NavBar ({onNavClicked}) {
     }
     
     
-    const animatedStyles = useAnimatedStyle(() =>({
-        transform: [{ translateY: withTiming(translateY.value, {duration: 600, easing: Easing.inOut(Easing.poly(4))})}],
-    }));
+    const animatedStyles = useAnimatedStyle(() => (
+        {transform: [{ translateY: withTiming(translateY.value, {duration: 400, easing: Easing.inOut(Easing.poly(4))})}]}
+        ));
 
 
     return (
@@ -33,13 +32,13 @@ export default function NavBar ({onNavClicked}) {
                 <Animated.View style={[styles.scroller, animatedStyles]}/>
             </View>
             <View style={styles.buttonsContainer}>
-                <NavButton onPressGroup={onAnyClicked} index={0} currIndex={currIndex} label='home' targetValue={translateY}        yPos={offset+(h * 0)}/>
-                <NavButton onPressGroup={onAnyClicked} index={1} currIndex={currIndex} label='shaders' targetValue={translateY}     yPos={offset+(h * 1)}/>
-                <NavButton onPressGroup={onAnyClicked} index={2} currIndex={currIndex} label='ui design' targetValue={translateY}   yPos={offset+(h * 2)}/>
-                <NavButton onPressGroup={onAnyClicked} index={3} currIndex={currIndex} label='scripting' targetValue={translateY}   yPos={offset+(h * 3)}/>
-                <NavButton onPressGroup={onAnyClicked} index={4} currIndex={currIndex} label='roles' targetValue={translateY}       yPos={offset+(h * 4)}/>
-                <NavButton onPressGroup={onAnyClicked} index={5} currIndex={currIndex} label='about me' targetValue={translateY}    yPos={offset+(h * 5)}/>
-                <NavButton onPressGroup={onAnyClicked} index={6} currIndex={currIndex} label='contact' targetValue={translateY}     yPos={offset+(h * 6)}/>
+                <NavButton onPressGroup={onAnyClicked} index={0} currIndex={currIndex} icon='home' label='home' targetValue={translateY}        yPos={offset+(h * 0)}/>
+                <NavButton onPressGroup={onAnyClicked} index={1} currIndex={currIndex} icon='brush' label='shaders' targetValue={translateY}     yPos={offset+(h * 1)}/>
+                <NavButton onPressGroup={onAnyClicked} index={2} currIndex={currIndex} icon='color-filter-outline' label='ui design' targetValue={translateY}   yPos={offset+(h * 2)}/>
+                <NavButton onPressGroup={onAnyClicked} index={3} currIndex={currIndex} icon='code-slash' label='scripting' targetValue={translateY}   yPos={offset+(h * 3)}/>
+                <NavButton onPressGroup={onAnyClicked} index={4} currIndex={currIndex} icon='briefcase' label='roles' targetValue={translateY}       yPos={offset+(h * 4)}/>
+                <NavButton onPressGroup={onAnyClicked} index={5} currIndex={currIndex} icon='person-circle' label='about me' targetValue={translateY}    yPos={offset+(h * 5)}/>
+                <NavButton onPressGroup={onAnyClicked} index={6} currIndex={currIndex} icon='mail' label='contact' targetValue={translateY}     yPos={offset+(h * 6)}/>
             </View>
         </View>
     );

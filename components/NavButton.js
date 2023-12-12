@@ -1,10 +1,10 @@
 import { StyleSheet, View, Pressable, TouchableHighlight, Text } from "react-native";
 import * as React from "react";
 import Animated, { useSharedValue } from "react-native-reanimated";
-import { ToggleButton } from "react-native-paper";
+import { Ionicons }  from '@expo/vector-icons'
 import '../fonts/kanit.css';
 
-export default function NavButton ( {label, onPress, onPressGroup, index, currIndex, targetValue, yPos} ) {
+export default function NavButton ( {label, icon, onPress, onPressGroup, index, currIndex, targetValue, yPos} ) {
 
     const bgEnabled = useSharedValue(1);
 
@@ -35,6 +35,7 @@ export default function NavButton ( {label, onPress, onPressGroup, index, currIn
     return (
         <View style={styles.buttonContainer}>
             <Pressable {...buttonProps}>
+                <Ionicons style={styles.buttonIcon} name={icon} size={25} color={currIndex==index ? 'white' : 'black'} />
                 <Text style={[{color: currIndex==index ? 'white' : 'black'}, styles.buttonLabel]}>{label}</Text>
             </Pressable>
         </View>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 6,
+        padding: 0,
     },
     buttonEnabled: {
         backgroundColor: "#000",
@@ -60,6 +61,9 @@ const styles = StyleSheet.create({
         height:'100%',
         justifyContent: 'center',
         padding: 20,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'flex-start'
     },
     buttonDisabled: {
         backgroundColor: "#fff",
@@ -67,12 +71,15 @@ const styles = StyleSheet.create({
         height:'100%',
         justifyContent: 'center',
         padding: 20,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'flex-start',
     },
     buttonIcon: {
         paddingRight: 8,
     },
     buttonLabel: {
-        fontSize: '1.5vw',
+        fontSize: '1.3vw',
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',
