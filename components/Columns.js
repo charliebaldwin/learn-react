@@ -1,4 +1,4 @@
-import React, {useRef, useState, createRef} from 'react'
+import React, {useRef, useState, createRef, forwardRef, useContext, createContext} from 'react'
 import {Text, StyleSheet, View, ScrollView} from 'react-native'
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withSpring, withTiming} from 'react-native-reanimated';
 
@@ -19,14 +19,11 @@ import { idText } from 'typescript';
 
 export default function ColumnsGroup (props) {
     
-    var scrollRef = React.useRef();
-    var navbarRef = React.useRef();
+    const scrollRef = React.useRef();
 
     const [scrollPos, setScrollPos] = useState(0);
-    var [scrollMaxHeight, setScrollMaxHeight] = useState(0);
-    var [scrollVisibleHeight, setScrollVisibleHeight] = useState(0);
-
-
+    const [scrollMaxHeight, setScrollMaxHeight] = useState(0);
+    const [scrollVisibleHeight, setScrollVisibleHeight] = useState(0);
 
     const [currIndex, setCurrIndex] = useState(0);
 
@@ -64,7 +61,6 @@ export default function ColumnsGroup (props) {
         <View style={styles.group}>
             <View style={styles.sidebarLeft}>
                 <NavBar
-                    ref={navbarRef}
                     onNavClicked={onNavClick}
                 />
             </View>
