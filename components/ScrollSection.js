@@ -4,7 +4,7 @@ import '../fonts/kanit.css';
 import SectionContact from './SectionContact'
 
 
-export default function ScrollSection ({title, subtitle, body, tailSpacing}, props) {
+export default function ScrollSection ({title, subtitle, body, tailSpacing, children}) {
     return (
         <View>
             <Text style={styles.title}>{title}</Text>
@@ -12,7 +12,7 @@ export default function ScrollSection ({title, subtitle, body, tailSpacing}, pro
             <View style={{height: 20}}/>
             <Text style={styles.body}>{body}</Text>
 
-            {props.children}
+            {children}
 
             <View style={{
                 height:tailSpacing,

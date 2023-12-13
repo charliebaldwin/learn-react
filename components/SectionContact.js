@@ -1,16 +1,17 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import { Ionicons }  from '@expo/vector-icons'
+import ScrollSection from './ScrollSection';
 
 import '../fonts/kanit.css';
 
 export default function SectionContact () {
 
     return (
-        <View>
+        <ScrollSection subtitle={'contact'} tailSpacing = {500}>
             <ContactItem icon={'mail'} label={'charlie@charliebaldwin.com'} link={'mailto:charlie@charliebaldwin.com'}/>
             <ContactItem icon={'call'} label={'+1 (650) 739-5634'} link={'tel:16507395634'}/>
-        </View>
+        </ScrollSection>
     );
 }
 
