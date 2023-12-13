@@ -4,14 +4,17 @@ import Animated, { useSharedValue } from "react-native-reanimated";
 import { Ionicons }  from '@expo/vector-icons'
 import '../fonts/kanit.css';
 
-export default function NavButton ( {label, icon, onPress, onPressGroup, index, currIndex, targetValue, yPos} ) {
+export default function NavButton ( {label, icon, onPress, onPressGroup, index, currIndex, scrollerY, scrollerH} ) {
 
     const bgEnabled = useSharedValue(1);
 
     var [enabled, setEnabled] = React.useState(false);
 
-    const setScrollerY = (targetValue) => {
-        targetValue.value = yPos;
+    const [buttonY, setButtonY] = React.useState(0);
+
+    const padding = 0;
+    const setScrollerY = () => {
+        scrollerY.value = buttonY + padding;
     }
     const setButtonEnabled = () => {
         setEnabled(true);
@@ -22,7 +25,7 @@ export default function NavButton ( {label, icon, onPress, onPressGroup, index, 
 
     var buttonProps = {
         onPress: () => {
-            setScrollerY(targetValue);
+            setScrollerY();
             setButtonEnabled();
             onPressGroup(index);
 
@@ -31,11 +34,16 @@ export default function NavButton ( {label, icon, onPress, onPressGroup, index, 
     }
 
 
-
     return (
-        <View style={styles.buttonContainer}>
+        <View 
+            style={[styles.buttonContainer, {padding: padding}]} 
+            onLayout={ event => {
+                setButtonY(event.nativeEvent.layout.y);
+                scrollerH.value = event.nativeEvent.layout.height - (2 * padding);
+            }}
+        >
             <Pressable {...buttonProps}>
-                <Ionicons style={styles.buttonIcon} name={icon} size={25} color={currIndex==index ? 'white' : 'black'} />
+                <Ionicons style={styles.buttonIcon} name={icon} size={styles.buttonLabel.fontSize} color={currIndex==index ? 'white' : 'black'} />
                 <Text style={[{color: currIndex==index ? 'white' : 'black'}, styles.buttonLabel]}>{label}</Text>
             </Pressable>
         </View>
@@ -48,38 +56,42 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 0,
+        padding: 4,
+        borderColor: 'green',
+        borderWidth: 0,
     },
     buttonEnabled: {
         backgroundColor: "#000",
-        borderRadius: 12,
-        shadowOffset: {width:4, height:3},
+        borderRadius: 'max(8px, 1.3vmin)',
+        shadowOffset: {width:'calc(1px + .2vw)', height:'calc(1px + .2vw)'},
         shadowColor: 'black',
         shadowRadius: 0,
         shadowOpacity: .5,
         width:'100%',
         height:'100%',
         justifyContent: 'center',
-        padding: 20,
+        paddingLeft: '3vh',
+        paddingVertical: '2vh',
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start'
     },
     buttonDisabled: {
-        backgroundColor: "#fff",
+        backgroundColor: 'transparent',
         width:'100%',
         height:'100%',
         justifyContent: 'center',
-        padding: 20,
+        paddingLeft: '3vh',
+        paddingVertical: '2vh',
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
     },
     buttonIcon: {
-        paddingRight: 8,
+        paddingRight: '3vh',
     },
     buttonLabel: {
-        fontSize: '1.3vw',
+        fontSize: 'calc(6pt + min(6vh, 3vmin))',
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',

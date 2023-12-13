@@ -1,12 +1,12 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import { Feather }  from '@expo/vector-icons'
+import { Ionicons }  from '@expo/vector-icons'
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withTiming} from 'react-native-reanimated';
 
-export default function IconButton ( {label, onPress, isVisible} ) {
+export default function IconButton ( {label, onPress, isVisible, icon} ) {
     return (
         <View style={[{opacity: isVisible ? 1 : 0}, styles.buttonContainer]}>
             <Pressable style={styles.button} onPress={onPress}>
-                <Feather name="chevron-up" size={30} color='white'/>
+                <Ionicons name={icon} size={styles.button.fontSize} color='white'/>
             </Pressable>
         </View>
     ); 
@@ -24,9 +24,10 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: "#000",
         color: "#fff",
-        borderRadius: 12,
-        width:'100%',
-        height:'100%',
+        borderRadius: 'max(8px, 1.3vmin)',
+        width: '6vmin',
+        fontSize: '3vmin',
+        aspectRatio: 1/1,
         justifyContent: 'center',
         alignItems: 'center',
         shadowOffset: {width:4, height:3},

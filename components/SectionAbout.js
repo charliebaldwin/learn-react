@@ -2,20 +2,27 @@ import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import { Ionicons }  from '@expo/vector-icons'
 import ScrollSection from './ScrollSection';
+import Button from './Button';
 
 import '../fonts/kanit.css';
 
-export default function SectionAbout () {
+export default function SectionAbout ( {textStyles}) {
 
     return (
-        <ScrollSection subtitle={'about me'} tailSpacing = {500}>
+        <View style={{alignItems:'center'}}>
             <View style={styles.container}>
-                <View style={styles.bodyContainer}>
-                    <Text style={styles.body}>
+                <View style={styles.textContainer}>
+                
+                    <Text style={textStyles.sectionTitle}>
+                        about me
+                    </Text>
+
+                    <Text style={textStyles.body}>
                     {'\t'}Lorem ipsum fermentum odio eu feugiat pretium nibh ipsum consequat. Cras tincidunt lobortis feugiat vivamus at. Odio euismod lacinia at quis risus sed. Porta non pulvinar neque laoreet suspendisse interdum consectetur. Pretium aenean pharetra magna ac placerat. Pretium fusce id velit ut tortor. Viverra tellus in hac habitasse platea dictumst vestibulum.
                     <br/>
                     {'\t'}Dui vivamus arcu felis bibendum ut tristique et egestas. Natoque penatibus et magnis dis parturient montes. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Dictum sit amet justo donec. Enim sed faucibus turpis in. Cras sed felis eget velit. Viverra maecenas accumsan lacus vel facilisis. Leo urna molestie at elementum eu facilisis sed odio. Purus sit amet luctus venenatis. Eget gravida cum sociis natoque penatibus et magnis dis. Adipiscing at in tellus integer feugiat scelerisque varius morbi.
                     </Text>
+
                 </View>
                 <View style={styles.imageContainer}>
                     <Image 
@@ -25,7 +32,16 @@ export default function SectionAbout () {
                     />
                 </View>
             </View>
-        </ScrollSection>
+
+            <View style={{
+                width: '30vw', height: 'max(8vh, 40px)', maxWidth: '100%',
+                paddingHorizontal: 20,    
+                marginVertical: '5vh',
+            }}>
+                <Button label={'download resume'} icon={'document-text'}/>
+            </View>
+
+        </View>
     );
 }
 
@@ -42,18 +58,22 @@ const styles = StyleSheet.create({
         lineHeight: 32,
 
     },
-    bodyContainer: {
-        flex: 3,
-        paddingRight: 100,
+    textContainer: {
+        flex: 1,
+        flexBasis: '65%',
+        flexShrink: 2,
+        paddingRight: '4vw',
+        flexDirection: 'column',
     },
     imageContainer: {
-        flex: 1,
+        flex: 2,
+        flexGrow: 2,
         alignItems: 'flex-end',
     },
     image: {
         width: '100%',
         aspectRatio: 1/1,
-        borderRadius: 20,
+        borderRadius: '1vw',
         shadowOffset: {width:6, height:6},
         shadowColor: 'black',
         shadowRadius: 0,

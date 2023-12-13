@@ -5,29 +5,30 @@ import Animated, {useAnimatedStyle, useSharedValue, Easing, withSpring, withTimi
 
 export default function ScrollBar ({totalHeight, visibleHeight, scrollPos}) {
 
-    const barFrameSize = visibleHeight - 300;
-
-    var calcBarSize = (visibleHeight / totalHeight) * barFrameSize;
+    const barFrameSize = visibleHeight * 0.5;
+    const visibleRatio = visibleHeight / totalHeight;
+    const visiblePercent = visibleRatio * 100;
+    const calcBarSize = (visibleHeight / totalHeight) * barFrameSize;
 
 
     const sharedPos = useSharedValue(0);
     sharedPos.value = (scrollPos / totalHeight) * barFrameSize;
     const animatedStyles = useAnimatedStyle(() =>({
-        transform: [{ translateY: withTiming(sharedPos.value, {duration: 100, easing: Easing.out(Easing.poly(6))})}],
+        transform: [{ translateY: withTiming(sharedPos.value, {duration: 300, easing: Easing.out(Easing.poly(4))})}],
       }));
 
     return (
         <View style={{
             backgroundColor: '#ddd',
-            width: 16,
-            flexBasis: barFrameSize,
-            borderRadius:10,
+            width: '1vw',
+            height: barFrameSize,
+            borderRadius:'1vw',
         }}>
             <Animated.View style={[{
                 backgroundColor: '#000',
                 width: '100%',
-                height: calcBarSize,
-                borderRadius:10,
+                height: `${visiblePercent}%`,
+                borderRadius:'1vw',
                 transform: [{translateY: scrollPos}],
             }, animatedStyles]}/>
         </View>
