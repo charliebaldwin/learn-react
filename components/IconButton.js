@@ -1,13 +1,32 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
 import { Ionicons }  from '@expo/vector-icons'
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withTiming} from 'react-native-reanimated';
+import { shadow } from "react-native-paper";
 
 export default function IconButton ( {label, onPress, isVisible, icon} ) {
+
+    const shadowSmall = .25;
+    const shadowLarge = 1.2;
+    const shadowShared = useSharedValue(shadowSmall);
+    const setShadow = (radius) => {
+        shadowShared.value = withTiming(radius, {duration: 150, easing: Easing.inOut(Easing.quad)} );
+    }
+    const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+    const animStyle_shadow = useAnimatedStyle(() => (
+        { boxShadow: `${shadowShared.value * 3}px ${shadowShared.value * 3}px ${shadowShared.value}vw rgba(0, 0, 0, 0.5)` }
+    ));
+
+
     return (
         <View style={[{opacity: isVisible ? 1 : 0}, styles.buttonContainer]}>
-            <Pressable style={styles.button} onPress={onPress}>
+            <AnimatedPressable 
+                style={ [styles.button, animStyle_shadow] } 
+                onPress={onPress}
+                onHoverIn={() => { setShadow(shadowLarge) }}
+                onHoverOut={() => { setShadow(shadowSmall) }}
+            >
                 <Ionicons name={icon} size={styles.button.fontSize} color='white'/>
-            </Pressable>
+            </AnimatedPressable>
         </View>
     ); 
 }
@@ -30,10 +49,6 @@ const styles = StyleSheet.create({
         aspectRatio: 1/1,
         justifyContent: 'center',
         alignItems: 'center',
-        shadowOffset: {width:4, height:3},
-        shadowColor: 'black',
-        shadowRadius: 0,
-        shadowOpacity: .5,
     },
     buttonIcon: {
         paddingRight: 8,
