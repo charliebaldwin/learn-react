@@ -23,7 +23,9 @@ export default function NavBar ({onNavClicked}) {
     
     
     const animatedStyles = useAnimatedStyle(() => (
-        {transform: [{ translateY: withTiming(translateY.value, {duration: 400, easing: Easing.inOut(Easing.poly(4))})}]}
+        {transform: [{ 
+            translateY: withTiming(translateY.value, {duration: 400, easing: Easing.inOut(Easing.poly(4))} )
+        }]}
         ));
 
 

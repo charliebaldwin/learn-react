@@ -4,6 +4,7 @@ import { Ionicons }  from '@expo/vector-icons'
 import ScrollSection from './ScrollSection';
 import Button from './Button';
 
+
 import '../fonts/kanit.css';
 
 export default function SectionAbout ( {textStyles}) {
