@@ -5,11 +5,11 @@ import '../fonts/kanit.css';
 import SectionContact from './SectionContact'
 
 
-export default function ScrollSection ({tailSpacing, children, sectionYValue}) {
+export default function ScrollSection ({tailSpacing, children, index, sections}) {
     return (
         <View 
             onLayout={ event => {
-                sectionYValue.value = event.nativeEvent.layout.y;
+                sections[index].setPageY(event.nativeEvent.layout.y);
             }}
         >
 

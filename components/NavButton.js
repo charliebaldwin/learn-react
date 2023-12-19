@@ -4,17 +4,20 @@ import Animated, {useAnimatedStyle, useSharedValue, Easing, withTiming} from 're
 import { Ionicons }  from '@expo/vector-icons'
 import '../fonts/kanit.css';
 
-export default function NavButton ( {label, icon, onPress, onPressGroup, index, currIndex, scrollerY, scrollerH} ) {
+export default function NavButton ( {label, icon, onPress, onPressGroup, index, currIndex, sections, scrollerY, scrollerH} ) {
 
-    const shadowSmall = .5;
-    const shadowLarge = 1.5;
+    const shadowSmall = 0;
+    const shadowLarge = 1.3;
     const shadowShared = useSharedValue(shadowSmall);
     const setShadow = (radius) => {
-        shadowShared.value = withTiming(radius, {duration: 100, easing: Easing.inOut(Easing.quad)} );
+        shadowShared.value = withTiming(radius, {duration: 160, easing: Easing.inOut(Easing.quad)} );
     }
     const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-    const animStyle_shadow = useAnimatedStyle(() => (
-        { boxShadow: `${shadowShared.value / 2}vmin ${shadowShared.value / 2}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.5)` }
+    const animStyle_disabled = useAnimatedStyle(() => (
+        { boxShadow: `${shadowShared.value / 2}vmin ${shadowShared.value / 2}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.35)` }
+    ));
+    const animStyle_enabled = useAnimatedStyle(() => (
+        { boxShadow: `${(shadowShared.value + .5) / 3}vmin ${(shadowShared.value + .5) / 3}vmin ${(shadowShared.value / 3)  + .5}vmin rgba(0, 0, 0, .5)` }
     ));
 
 
@@ -32,24 +35,22 @@ export default function NavButton ( {label, icon, onPress, onPressGroup, index, 
         <View 
             style={[styles.buttonContainer, {padding: padding}]} 
             onLayout={ event => {
-                setButtonY(event.nativeEvent.layout.y);
+                sections[index].setScrollerY(event.nativeEvent.layout.y);
                 scrollerH.value = event.nativeEvent.layout.height - (2 * padding);
             }}
         >
             <AnimatedPressable
-                style={currIndex==index ? [styles.buttonEnabled, animStyle_shadow, {boxShadow:`.25vmin .25vmin .5vmin rgba(0, 0, 0, 0.5)`}] : [styles.buttonDisabled, animStyle_shadow]}
+                style={currIndex==index ? [styles.buttonEnabled, animStyle_enabled] : [styles.buttonDisabled, animStyle_disabled]}
                 onPress={() => {
+                    setShadow(shadowSmall);
                     setScrollerY();
                     onPressGroup(index);
-                    
                 }}
                 onHoverIn={() => { 
                     setShadow(shadowLarge);
-                    console.log("hover IN: " + label);
                  }}
                 onHoverOut={() => { 
                     setShadow(shadowSmall);
-                    console.log("hover OUT: " + label);
                 }}
             >
                 <Ionicons style={styles.buttonIcon} name={icon} size={styles.buttonLabel.fontSize} color={currIndex==index ? 'white' : 'black'} />
@@ -66,7 +67,6 @@ const styles = StyleSheet.create({
         maxHeight: '7vh',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '1vh',
         borderColor: 'green',
         borderWidth: 0,
     },
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     },
     buttonLabel: {
         fontSize: 'calc(4pt + 3vmin )',
+        lineHeight: 'calc(4pt + 2.5vmin )',
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',

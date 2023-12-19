@@ -5,15 +5,15 @@ import { shadow } from "react-native-paper";
 
 export default function IconButton ( {label, onPress, isVisible, icon} ) {
 
-    const shadowSmall = .25;
-    const shadowLarge = 1.2;
+    const shadowSmall = .5;
+    const shadowLarge = 1.5;
     const shadowShared = useSharedValue(shadowSmall);
     const setShadow = (radius) => {
         shadowShared.value = withTiming(radius, {duration: 150, easing: Easing.inOut(Easing.quad)} );
     }
     const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
     const animStyle_shadow = useAnimatedStyle(() => (
-        { boxShadow: `${shadowShared.value * 3}px ${shadowShared.value * 3}px ${shadowShared.value}vw rgba(0, 0, 0, 0.5)` }
+        { boxShadow: `${shadowShared.value / 3}vmin ${shadowShared.value / 3}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.5)` }
     ));
 
 

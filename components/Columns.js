@@ -25,36 +25,35 @@ export default function ColumnsGroup (props) {
     const [scrollMaxHeight, setScrollMaxHeight] = useState(0);
     const [scrollVisibleHeight, setScrollVisibleHeight] = useState(0);
 
-    const [currIndex, setCurrIndex] = useState(0);
+    const [pageY_0, setPageY_0] = useState(0);
+    const [pageY_1, setPageY_1] = useState(0);
+    const [pageY_2, setPageY_2] = useState(0);
+    const [pageY_3, setPageY_3] = useState(0);
+    const [pageY_4, setPageY_4] = useState(0);
 
-    const sectionYHome = useSharedValue(0);
-    const sectionYWork = useSharedValue(0);
-    const sectionYRoles = useSharedValue(0);
-    const sectionYAbout = useSharedValue(0);
-    const sectionYContact = useSharedValue(0);
+    const [scrollerY_0, setScrollerY_0] = useState(0);
+    const [scrollerY_1, setScrollerY_1] = useState(0);
+    const [scrollerY_2, setScrollerY_2] = useState(0);
+    const [scrollerY_3, setScrollerY_3] = useState(0);
+    const [scrollerY_4, setScrollerY_4] = useState(0);
 
-    const sectionYValues = [
-        sectionYHome, sectionYWork, sectionYRoles, sectionYAbout, sectionYContact
+    const sections = [
+        {index: 0, name:'home',   pageY: pageY_0, setPageY: setPageY_0, scrollerY: scrollerY_0, setScrollerY: setScrollerY_0},
+        {index: 1, name:'works',  pageY: pageY_1, setPageY: setPageY_1, scrollerY: scrollerY_1, setScrollerY: setScrollerY_1},
+        {index: 2, name:'roles',  pageY: pageY_2, setPageY: setPageY_2, scrollerY: scrollerY_2, setScrollerY: setScrollerY_2},
+        {index: 3, name:'about',  pageY: pageY_3, setPageY: setPageY_3, scrollerY: scrollerY_3, setScrollerY: setScrollerY_3},
+        {index: 4, name:'contact',pageY: pageY_4, setPageY: setPageY_4, scrollerY: scrollerY_4, setScrollerY: setScrollerY_4},
     ];
+    const [currIndex, setCurrIndex] = useState(0);
+    const currSection = useSharedValue(sections[0]);
 
     const onNavClick = (index) => {
-        //const scrollY = (index / sectionCount) * scrollMaxHeight;
-        const scrollY = sectionYValues[index].value - 50;
-        scrollRef.current.scrollTo({x: 0, y:scrollY, animated:true});
+        setCurrIndex(index);
+        currSection.value = sections[index];
+        const scrollY = sections[index].pageY - 50;
+        scrollRef.current.scrollTo({x: 0, y:scrollY, animated:false});
         console.log(scrollY);
     }
-
-    const updateNavBarScroll = (newY) => {
-        let index = 0;
-        for (let i=0; i<sectionYValues.length; i++) {
-            if (newY > sectionYValues[i].value){
-                index++;
-            } else {
-                break;
-            }
-        }
-        console.log(index);
-    } 
 
 
     return (
@@ -62,6 +61,8 @@ export default function ColumnsGroup (props) {
             <View style={styles.sidebarLeft}>
                 <NavBar
                     onNavClicked={onNavClick}
+                    sections={sections}
+                    currSection={currSection}
                 />
             </View>
 
@@ -70,7 +71,7 @@ export default function ColumnsGroup (props) {
                 ref={scrollRef}
                 style={styles.scrollgroup}
                 directionalLockEnabled={true}
-                showsVerticalScrollIndicator={false}
+                showsVerticalScrollIndicator={true}
                 // onScroll = {Animated.event(
                 //     [{
                 //         nativeEvent: {
@@ -82,9 +83,6 @@ export default function ColumnsGroup (props) {
                 //     {useNativeDriver: false} 
                 // )} 
                 // scrollEventThrottle={16}
-                onContentSizeChanged={height => {
-                    setScrollMaxHeight(height);
-                }}
                 onLayout={({
                     nativeEvent: {
                         layout: {height}
@@ -93,38 +91,44 @@ export default function ColumnsGroup (props) {
                     setScrollVisibleHeight(height);
                 }}
                 onScroll = {(event) => {
-                    setScrollPos(event.nativeEvent.contentOffset.y);
-                    updateNavBarScroll(event.nativeEvent.contentOffset.y);
+                    const newY = event.nativeEvent.contentOffset.y;
+                    setScrollPos(newY);
+                    if(currIndex < sections.length - 1 && newY >= sections[currIndex+1].pageY - 50) {
+                        currSection.value=sections[currIndex+1];
+                        setCurrIndex(currIndex + 1);
+                    } else if (currIndex > 0 && newY < sections[currIndex].pageY - 50) {
+                        currSection.value=sections[currIndex-1];
+                        setCurrIndex(currIndex - 1);
+                    }
                 } }
-                scrollEventThrottle={16}
+                scrollEventThrottle={32}
                 >
-                    <View onLayout={({
-                        nativeEvent: {
-                            layout: {height}
-                        }
-                    }) => {
+                    <View 
+                    onLayout={({ nativeEvent: { layout: {height} }}) => {
                         setScrollMaxHeight(height);
-                    }}>
+                    }}
+                        style={styles.sectionsContainer}
+                    >
 
 
-                        <ScrollSection tailSpacing={160} sectionYValue={sectionYHome}>
+                        <ScrollSection tailSpacing={160} index={0} sections={sections}>
                             <View style={{height: '20vh'}}/>
                             <SectionHome textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing={500} sectionYValue={sectionYWork}>
+                        <ScrollSection tailSpacing={500} index={1} sections={sections}>
                             <SectionWorks textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing = {500} sectionYValue={sectionYRoles}>
+                        <ScrollSection tailSpacing = {500} index={2} sections={sections}>
                             <SectionRoles textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing = {500} sectionYValue={sectionYAbout}>
+                        <ScrollSection tailSpacing = {500} index={3} sections={sections}>
                             <SectionAbout textStyles={textStyles}/>
                         </ScrollSection>
                         
-                        <ScrollSection tailSpacing = {500} sectionYValue={sectionYContact}>
+                        <ScrollSection tailSpacing = {1000} index={4} sections={sections}>
                             <SectionContact textStyles={textStyles}/>
                         </ScrollSection>
 
@@ -135,11 +139,11 @@ export default function ColumnsGroup (props) {
             </View>
 
             <View style={styles.sidebarRight}>
-            <View style={{flex: 1,backgroundColor:'red'}}/>
-
-                <ScrollBar totalHeight={scrollMaxHeight} visibleHeight={scrollVisibleHeight} scrollPos={scrollPos}/>
-
-                <View style={{flex: 1, justifyContent:'flex-end', paddingBottom:30}}>
+            {/* <View style={{flex: 1,backgroundColor:'red', flexDirection:'column'}}/> */}
+{/* 
+                <ScrollBar totalHeight={scrollMaxHeight} visibleHeight={scrollVisibleHeight} scrollPos={scrollPos}/> 
+*/}
+                <View style={{flex: 1, justifyContent:'center', alignContent:'center', paddingBottom:30}}>
                     <IconButton 
                         icon={"caret-up"}
                         isVisible={scrollPos > 0}
@@ -170,7 +174,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     sidebarLeft: {
-        flex: 1.5,
+        flex: 3,
         minWidth: 160,
         justifyContent:'center',
     },
@@ -181,11 +185,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     colMain: {
-        flex: 5,
+        flex: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: '8vw',
+        paddingHorizontal: '0vw',
         borderRadius:30,
+    },
+    sectionsContainer: {
+        marginRight: '16vw',
+        marginLeft: '8vw',
     },
     title: {
         fontSize: 96,

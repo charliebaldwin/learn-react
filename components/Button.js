@@ -6,15 +6,15 @@ import { shadow } from "react-native-paper";
 
 export default function Button ( {label, onPress, icon} ) {
 
-    const shadowSmall = .25;
-    const shadowLarge = 1.3;
+    const shadowSmall = .7;
+    const shadowLarge = 1.5;
     const shadowShared = useSharedValue(shadowSmall);
     const setShadow = (radius) => {
-        shadowShared.value = withTiming(radius, {duration: 150, easing: Easing.inOut(Easing.quad)} );
+        shadowShared.value = withTiming(radius, {duration: 100, easing: Easing.inOut(Easing.quad)} );
     }
     const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
     const animStyle_shadow = useAnimatedStyle(() => (
-        { boxShadow: `${shadowShared.value * 6}px ${shadowShared.value * 6}px ${shadowShared.value}vw rgba(0, 0, 0, 0.5)` }
+        { boxShadow: `${shadowShared.value / 2}vmin ${shadowShared.value / 2}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.35)` }
     ));
 
     return (
@@ -38,25 +38,28 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 6,
+
     },
     button: {
         backgroundColor: "#000",
-        borderRadius: 'max(10px, .6vw)',
+        borderRadius: 'max(10px, 1.8vmin)',
         width:'100%',
         height:'100%',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        paddingHorizontal: '1.5vw',
+        gap: '1.5vw',
     },
     buttonLabel: {
-        fontSize: 'min(32pt, max(4vmin, 12pt))',
+        fontSize: 'calc(4pt + 3vmin )',
+        lineHeight: 'calc(4pt + 2.5vmin )',
         color: '#fff',
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',
+        
     },
     buttonIcon: {
-        padding: '1vw',
     },
 });

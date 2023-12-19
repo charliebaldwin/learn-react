@@ -35,8 +35,8 @@ export default function SectionAbout ( {textStyles}) {
             </View>
 
             <View style={{
-                width: '30vw', height: 'max(8vh, 40px)', maxWidth: '100%',
-                paddingHorizontal: 20,    
+                width: '100%', height: 'max(8vh, 40px)',
+                paddingHorizontal: '5vw',    
                 marginVertical: '5vh',
             }}>
                 <Button label={'download resume'} icon={'document-text'}/>

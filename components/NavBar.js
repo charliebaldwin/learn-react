@@ -5,7 +5,7 @@ import { ToggleButton } from 'react-native-paper';
 
 import NavButton from "./NavButton";
 
-export default function NavBar ({onNavClicked}) {
+export default function NavBar ({sections, currSection, onNavClicked}) {
     
     const offset = 0;
     const h = 59;
@@ -24,7 +24,7 @@ export default function NavBar ({onNavClicked}) {
     
     const animatedStyles = useAnimatedStyle(() => (
         {transform: [{ 
-            translateY: withTiming(translateY.value, {duration: 400, easing: Easing.inOut(Easing.poly(4))} )
+            translateY: withTiming(currSection.value.scrollerY, {duration: 400, easing: Easing.inOut(Easing.poly(4))} )
         }]}
         ));
 
@@ -42,32 +42,37 @@ export default function NavBar ({onNavClicked}) {
             <View style={styles.buttonsContainer}>
                 <NavButton label='home'
                     onPressGroup={onAnyClicked}
-                    index={0} currIndex={currIndex} 
+                    index={0} currIndex={currSection.value.index} 
                     icon='home' 
+                    sections={sections}
                     scrollerY={translateY} scrollerH={scrollerH}
                 />
                 <NavButton label='works' 
                     onPressGroup={onAnyClicked} 
-                    index={1} currIndex={currIndex} 
+                    index={1} currIndex={currSection.value.index} 
                     icon='grid'
+                    sections={sections}
                     scrollerY={translateY} scrollerH={scrollerH}
                 />
                 <NavButton label='roles' 
                     onPressGroup={onAnyClicked} 
-                    index={2} currIndex={currIndex} 
+                    index={2} currIndex={currSection.value.index} 
                     icon='briefcase'
+                    sections={sections}
                     scrollerY={translateY} scrollerH={scrollerH}
                 />
                 <NavButton label='about me'
                     onPressGroup={onAnyClicked} 
-                    index={3} currIndex={currIndex} 
+                    index={3} currIndex={currSection.value.index} 
                     icon='body'
+                    sections={sections}
                     scrollerY={translateY} scrollerH={scrollerH} 
                 />
                 <NavButton label='contact'
                     onPressGroup={onAnyClicked}
-                    index={4} currIndex={currIndex}
+                    index={4} currIndex={currSection.value.index}
                     icon='mail'
+                    sections={sections}
                     scrollerY={translateY} scrollerH={scrollerH}
                 />
             </View>
@@ -101,6 +106,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         height:'auto',
         flexDirection: 'column',
+        gap: '.5vmin',
         flex: 20,
     },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
 import { Ionicons }  from '@expo/vector-icons'
 import ScrollSection from './ScrollSection';
 
@@ -15,3 +15,21 @@ export default function SectionWorks ({textStyles}) {
         </View>
     );
 }
+
+function Work () {
+    return (
+        <View>
+
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    worksContainer: {
+
+    },
+    work: {
+
+    }
+});
+

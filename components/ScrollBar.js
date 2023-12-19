@@ -8,13 +8,11 @@ export default function ScrollBar ({totalHeight, visibleHeight, scrollPos}) {
     const barFrameSize = visibleHeight * 0.5;
     const visibleRatio = visibleHeight / totalHeight;
     const visiblePercent = visibleRatio * 100;
-    const calcBarSize = (visibleHeight / totalHeight) * barFrameSize;
-
 
     const sharedPos = useSharedValue(0);
     sharedPos.value = (scrollPos / totalHeight) * barFrameSize;
     const animatedStyles = useAnimatedStyle(() =>({
-        transform: [{ translateY: withTiming(sharedPos.value, {duration: 300, easing: Easing.out(Easing.poly(4))})}],
+        transform: [{ translateY: withTiming(sharedPos.value, {duration: 500, easing: Easing.out(Easing.poly(4))})}],
       }));
 
     return (
