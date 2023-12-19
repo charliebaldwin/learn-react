@@ -17,8 +17,8 @@ export default function ScrollSection ({tailSpacing, children, index, sections})
 
             <View style={{
                 height:tailSpacing,
-                backgroundColor: '#fff',
-                borderWidth: 4,
+                backgroundColor: 'transparent',
+                borderWidth: 0,
                 borderColor: '#fafafa',
                 borderRadius: 20,
             }}/>

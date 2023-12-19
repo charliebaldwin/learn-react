@@ -9,6 +9,7 @@ import SectionRoles from './SectionRoles';
 import SectionAbout from './SectionAbout'
 import SectionContact from './SectionContact'
 
+import WorkModal from './WorkModal'
 import NavBar from './NavBar'
 import ScrollBar from './ScrollBar'
 import IconButton from './IconButton'
@@ -56,8 +57,20 @@ export default function ColumnsGroup (props) {
     }
 
 
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalContent, setModalContent] = useState({title: 'empty modal'});
+    const openWorkModal = (modalContent) => {
+        setShowModal(true);
+        // setModalContent({
+        //     title: modalContent.title,
+        // });
+    }
+
+
     return (
         <View style={styles.group}>
+            <WorkModal enabled={showModal} setEnabled={setShowModal} content={modalContent} textStyles={textStyles}/>
             <View style={styles.sidebarLeft}>
                 <NavBar
                     onNavClicked={onNavClick}
@@ -72,17 +85,6 @@ export default function ColumnsGroup (props) {
                 style={styles.scrollgroup}
                 directionalLockEnabled={true}
                 showsVerticalScrollIndicator={true}
-                // onScroll = {Animated.event(
-                //     [{
-                //         nativeEvent: {
-                //             contentOffset: {
-                //                 y: scrollPos,
-                //             },
-                //         },
-                //     }],
-                //     {useNativeDriver: false} 
-                // )} 
-                // scrollEventThrottle={16}
                 onLayout={({
                     nativeEvent: {
                         layout: {height}
@@ -93,10 +95,10 @@ export default function ColumnsGroup (props) {
                 onScroll = {(event) => {
                     const newY = event.nativeEvent.contentOffset.y;
                     setScrollPos(newY);
-                    if(currIndex < sections.length - 1 && newY >= sections[currIndex+1].pageY - 50) {
+                    if(currIndex < sections.length - 1 && newY >= sections[currIndex+1].pageY - 200) {
                         currSection.value=sections[currIndex+1];
                         setCurrIndex(currIndex + 1);
-                    } else if (currIndex > 0 && newY < sections[currIndex].pageY - 50) {
+                    } else if (currIndex > 0 && newY < sections[currIndex].pageY - 200) {
                         currSection.value=sections[currIndex-1];
                         setCurrIndex(currIndex - 1);
                     }
@@ -111,13 +113,13 @@ export default function ColumnsGroup (props) {
                     >
 
 
-                        <ScrollSection tailSpacing={160} index={0} sections={sections}>
+                        <ScrollSection tailSpacing={200} index={0} sections={sections}>
                             <View style={{height: '20vh'}}/>
                             <SectionHome textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing={500} index={1} sections={sections}>
-                            <SectionWorks textStyles={textStyles}/>
+                        <ScrollSection tailSpacing={200} index={1} sections={sections}>
+                            <SectionWorks textStyles={textStyles} onPressWork={openWorkModal}/>
                         </ScrollSection>
 
                         <ScrollSection tailSpacing = {500} index={2} sections={sections}>
@@ -159,6 +161,7 @@ export default function ColumnsGroup (props) {
 }
 
 const styles = StyleSheet.create({
+    
     group: {
         width: '100%',
         height: '100%',
@@ -174,7 +177,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     sidebarLeft: {
-        flex: 3,
+        flex: 2.5,
         minWidth: 160,
         justifyContent:'center',
     },

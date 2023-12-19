@@ -26,11 +26,14 @@ export default function SectionAbout ( {textStyles}) {
 
                 </View>
                 <View style={styles.imageContainer}>
-                    <Image 
-                        style={styles.image}
-                        resizeMode={'contain'}
-                        source={require('../assets/roto-headshot-square.jpg')}
-                    />
+                    <View style={styles.image}>
+                        <Image  
+                            style={{flex: 1, borderRadius:'1vw'}}
+                            resizeMode={'contain'}
+                            source={require('../assets/roto-headshot-square.png')}
+                        />
+                    </View>
+                    
                 </View>
             </View>
 
@@ -75,10 +78,7 @@ const styles = StyleSheet.create({
         width: '100%',
         aspectRatio: 1/1,
         borderRadius: '1vw',
-        shadowOffset: {width:6, height:6},
-        shadowColor: 'black',
-        shadowRadius: 0,
-        shadowOpacity: 1,
+        boxShadow: '5px 5px 12px rgba(0,0,0,.4)',
     },
     filler: {
         height: 500,
