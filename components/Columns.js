@@ -13,6 +13,9 @@ import WorkModal from './WorkModal'
 import NavBar from './NavBar'
 import ScrollBar from './ScrollBar'
 import IconButton from './IconButton'
+import Button from './Button'
+import SoundButton from './SoundButton';
+
 
 import '../fonts/kanit.css';
 import { idText } from 'typescript';
@@ -55,8 +58,6 @@ export default function ColumnsGroup (props) {
         scrollRef.current.scrollTo({x: 0, y:scrollY, animated:false});
         console.log(scrollY);
     }
-
-
 
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState({title: 'empty modal'});
@@ -112,7 +113,6 @@ export default function ColumnsGroup (props) {
                         style={styles.sectionsContainer}
                     >
 
-
                         <ScrollSection tailSpacing={200} index={0} sections={sections}>
                             <View style={{height: '20vh'}}/>
                             <SectionHome textStyles={textStyles}/>
@@ -122,13 +122,17 @@ export default function ColumnsGroup (props) {
                             <SectionWorks textStyles={textStyles} onPressWork={openWorkModal}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing = {500} index={2} sections={sections}>
+                        <ScrollSection tailSpacing = {50} index={2} sections={sections}>
                             <SectionRoles textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing = {500} index={3} sections={sections}>
+                        <ScrollSection tailSpacing = {30} index={3} sections={sections}>
                             <SectionAbout textStyles={textStyles}/>
                         </ScrollSection>
+
+                        <View style={{height: 50, marginBottom: 100}}>
+                        <SoundButton label="mikaela click this!" icon="volume-high" />
+                        </View>
                         
                         <ScrollSection tailSpacing = {1000} index={4} sections={sections}>
                             <SectionContact textStyles={textStyles}/>
