@@ -19,7 +19,7 @@ export default function SectionHome ({textStyles}) {
 
             <View style={{height: '5vh'}}/>
 
-            <Text style={textStyles.body}>
+            <Text style={textStyles.bodyLarge}>
                 scroll to see some of my work, or use the sidebar to jump to the section you’re looking for.
             </Text>
         </View>

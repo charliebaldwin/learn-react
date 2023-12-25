@@ -40,15 +40,15 @@ export default function SectionWorks ({textStyles, onPressWork}) {
 
 function Work ({title, onPress}) {
 
-    const shadowSmall = 1;
-    const shadowLarge = 3;
+    const shadowSmall = 0.8;
+    const shadowLarge = 2;
     const shadowShared = useSharedValue(shadowSmall);
     const setShadow = (radius) => {
         shadowShared.value = withTiming(radius, {duration: 160, easing: Easing.inOut(Easing.quad)} );
     }
     const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
     const animStyle_shadow = useAnimatedStyle(() => (
-        { boxShadow: `${shadowShared.value / 2}vmin ${shadowShared.value / 2}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.35)` }
+        { boxShadow: `${shadowShared.value / 2.7}vmin ${shadowShared.value / 2.7}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.4)` }
     ));
 
     const showModal = () => {
@@ -67,6 +67,8 @@ function Work ({title, onPress}) {
                 setShadow(shadowSmall);
             }}
             onPress={showModal}
+            onPressIn={() => { setShadow(shadowSmall * 0.5) }}
+            onPressOut={()=> { setShadow(shadowLarge) }}
         >
             <View style={styles.workButton}>
 
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'flex-start',
         width: '100%',
-        marginBottom: 20,
+        marginBottom: '2vh',
 
     },
     work: {
@@ -92,27 +94,28 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         flexDirection: 'column',
         alignItems: 'stretch',
-        marginHorizontal: 10,
-        marginVertical: 20,
+        marginHorizontal: '1.5vmin',
+        marginVertical: '1.5vmin',
 
         borderColor: '#000',
         borderWidth: 0,
-        borderRadius: 35,
+        borderRadius: '2.5vmin',
 
     },
     workButton: {
         aspectRatio: 1.618/1,
         backgroundColor: '#bbb',
-        borderRadius: 30,
+        borderRadius: '1.5vmin',
+        margin: '1.25vmin',
     },
     workLabel: {
-        fontSize: 'min(28pt, 1.4vw)',
+        fontSize: 'min(28pt, 1.6vw)',
         fontWeight: 500,
         textAlign: 'center',
         fontFamily: 'Kanit',
-        lineHeight: 40,
-        padding: 5,
-        marginBottom: 10,
+        lineHeight: 'min(24pt, 1.2vw)',
+        padding: '.5vmin',
+        marginBottom: '1vmin',
     },
 });
 

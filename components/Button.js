@@ -7,14 +7,14 @@ import { shadow } from "react-native-paper";
 export default function Button ( {label, onPress, icon} ) {
 
     const shadowSmall = .7;
-    const shadowLarge = 1.5;
+    const shadowLarge = 2;
     const shadowShared = useSharedValue(shadowSmall);
     const setShadow = (radius) => {
         shadowShared.value = withTiming(radius, {duration: 100, easing: Easing.inOut(Easing.quad)} );
     }
     const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
     const animStyle_shadow = useAnimatedStyle(() => (
-        { boxShadow: `${shadowShared.value / 2}vmin ${shadowShared.value / 2}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.35)` }
+        { boxShadow: `${shadowShared.value / 2}vmin ${shadowShared.value / 2}vmin ${shadowShared.value}vmin rgba(0, 0, 0, 0.5)` }
     ));
 
     return (
@@ -22,6 +22,8 @@ export default function Button ( {label, onPress, icon} ) {
             <AnimatedPressable
             style={[styles.button, animStyle_shadow]}
             onPress={onPress}
+            onPressIn={() => {setShadow(shadowSmall * 0.5) }}
+            onPressOut={() => {setShadow(shadowSmall) }}
             onHoverIn={() => { setShadow(shadowLarge) }}
             onHoverOut={() => { setShadow(shadowSmall) }}
             >

@@ -103,38 +103,48 @@ export default function ColumnsGroup (props) {
                         currSection.value=sections[currIndex-1];
                         setCurrIndex(currIndex - 1);
                     }
-                } }
+                }}
                 scrollEventThrottle={32}
                 >
                     <View 
                     onLayout={({ nativeEvent: { layout: {height} }}) => {
                         setScrollMaxHeight(height);
                     }}
-                        style={styles.sectionsContainer}
+                    style={styles.sectionsContainer}
                     >
 
-                        <ScrollSection tailSpacing={200} index={0} sections={sections}>
+                        <View style={{height: 50}}/>
+
+                        <ScrollSection tailSpacing={100} index={0} sections={sections}>
                             <View style={{height: '20vh'}}/>
                             <SectionHome textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing={200} index={1} sections={sections}>
+                        <View style={styles.divider}/>
+
+                        <ScrollSection tailSpacing={50} index={1} sections={sections}>
                             <SectionWorks textStyles={textStyles} onPressWork={openWorkModal}/>
                         </ScrollSection>
+
+                        <View style={styles.divider}/>
 
                         <ScrollSection tailSpacing = {50} index={2} sections={sections}>
                             <SectionRoles textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <ScrollSection tailSpacing = {30} index={3} sections={sections}>
+                        <View style={styles.divider}/>
+
+                        <ScrollSection tailSpacing = {50} index={3} sections={sections}>
                             <SectionAbout textStyles={textStyles}/>
                         </ScrollSection>
 
-                        <View style={{height: 50, marginBottom: 100}}>
+                        {/* <View style={{height: 50, marginBottom: 100}}>
                         <SoundButton label="mikaela click this!" icon="volume-high" />
-                        </View>
+                        </View> */}
+
+                        <View style={styles.divider}/>
                         
-                        <ScrollSection tailSpacing = {1000} index={4} sections={sections}>
+                        <ScrollSection tailSpacing = {'50vh'} index={4} sections={sections}>
                             <SectionContact textStyles={textStyles}/>
                         </ScrollSection>
 
@@ -156,6 +166,8 @@ export default function ColumnsGroup (props) {
                         onPress={() => {
                             scrollRef.current.scrollTo({x: 0, y:scrollY, animated:true});
                         }}
+                        shadowSizes={[0.5, 1.5]}
+                        size={8}
                     />
                 </View>
             </View>
@@ -210,6 +222,15 @@ const styles = StyleSheet.create({
     full: {
         width: '100%',
         height: '100%',
+    },
+    divider: {
+        borderColor: '#f5f5f5',
+        borderWidth: 3,
+        borderRadius: 10,
+        width: '80%',
+        height: 6,
+        alignSelf: 'center',
+        margin: 5,
     }
 });
 
@@ -226,24 +247,41 @@ const textStyles = StyleSheet.create({
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',
-        lineHeight: 'min(60pt, 3vw)',
+        lineHeight: 'min(56pt, 2.5vw)',
         width: '60%',
         paddingBottom: '1vw',
     },
-    body: {
+    bodyLarge: {
         fontSize: 'min(18pt, 1.5vw)',
         fontWeight: 400,
         textAlign: 'left',
         fontFamily: 'Kanit',
         lineHeight: 'min(24pt, 2vw)',
     },
+    bodySmall: {
+        fontSize: 'min(14pt, 1.2vw)',
+        fontWeight: 400,
+        textAlign: 'left',
+        fontFamily: 'Kanit',
+        lineHeight: 'min(20pt, 1.65vw)',
+    },
     label: {
         fontSize: 'min(36pt, 1.8vw)',
         fontWeight: 600,
         textAlign: 'left',
         fontFamily: 'Kanit',
-        lineHeight: 36,
+        lineHeight: 'min(36pt, 2vw)',
         paddingLeft:'1.5vw',
+        marginTop: '.5vw',
         width: '55%',
+    },
+    sublabel: {
+        fontSize: 'min(32pt, 1.4vw)',
+        fontWeight: 500,
+        textAlign: 'left',
+        fontFamily: 'Kanit',
+        fontStyle: 'italic',
+        lineHeight: 'min(28pt, 1.2vw)',
+        paddingLeft:'1.5vw',
     },
 });

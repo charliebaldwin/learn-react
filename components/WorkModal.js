@@ -21,7 +21,7 @@ export default function WorkModal ({enabled, setEnabled, content, textStyles}) {
 
                     <View style={styles.bodyContainer}>
                         <View style={styles.bodyColumnL}>
-                            <Text style={textStyles.body}>sample body text sample body text sample body text sample body text sample body text sample body text sample body text sample body text</Text>
+                            <Text style={textStyles.bodySmall}>sample body text sample body text sample body text sample body text sample body text sample body text sample body text sample body text</Text>
                         </View>
 
                         <View style={styles.bodyColumnR}>

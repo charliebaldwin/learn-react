@@ -42,11 +42,12 @@ export default function NavButton ( {label, icon, onPress, onPressGroup, index, 
             <AnimatedPressable
                 style={currIndex==index ? [styles.buttonEnabled, animStyle_enabled] : [styles.buttonDisabled, animStyle_disabled]}
                 onPress={() => {
-                    setShadow(shadowSmall);
                     setScrollerY();
                     onPressGroup(index);
                 }}
-                onHoverIn={() => { 
+                onPressIn={ () => { setShadow(shadowLarge * 0.3) }}
+                onPressOut={() => { setShadow(shadowLarge) }}
+                onHoverIn={ () => { 
                     setShadow(shadowLarge);
                  }}
                 onHoverOut={() => { 

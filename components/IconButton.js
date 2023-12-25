@@ -3,10 +3,10 @@ import { Ionicons }  from '@expo/vector-icons'
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withTiming} from 'react-native-reanimated';
 import { shadow } from "react-native-paper";
 
-export default function IconButton ( {label, onPress, isVisible, icon} ) {
+export default function IconButton ( {label, onPress, isVisible, icon, size, shadowSizes} ) {
 
-    const shadowSmall = .5;
-    const shadowLarge = 1.5;
+    const shadowSmall = shadowSizes[0];
+    const shadowLarge = shadowSizes[1];
     const shadowShared = useSharedValue(shadowSmall);
     const setShadow = (radius) => {
         shadowShared.value = withTiming(radius, {duration: 150, easing: Easing.inOut(Easing.quad)} );
@@ -20,12 +20,15 @@ export default function IconButton ( {label, onPress, isVisible, icon} ) {
     return (
         <View style={[{opacity: isVisible ? 1 : 0}, styles.buttonContainer]}>
             <AnimatedPressable 
-                style={ [styles.button, animStyle_shadow] } 
+                style={ [styles.button, animStyle_shadow, {width: `${size}vmin`, borderRadius: `max(${size * 1.3}px, ${size * 0.22}vmin)`,}] } 
                 onPress={onPress}
+                onPressIn={() => {setShadow(shadowSmall * 0.5) }}
+                onPressOut={() => {setShadow(shadowSmall) }}
                 onHoverIn={() => { setShadow(shadowLarge) }}
                 onHoverOut={() => { setShadow(shadowSmall) }}
+                accessibilityLabel={'hello accessibility label'}
             >
-                <Ionicons name={icon} size={styles.button.fontSize} color='white'/>
+                <Ionicons name={icon} size={`${size / 2}vmin`} color='white'/>
             </AnimatedPressable>
         </View>
     ); 

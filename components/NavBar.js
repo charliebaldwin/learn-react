@@ -24,7 +24,7 @@ export default function NavBar ({sections, currSection, onNavClicked}) {
     
     const animatedStyles = useAnimatedStyle(() => (
         {transform: [{ 
-            translateY: withTiming(currSection.value.scrollerY, {duration: 400, easing: Easing.inOut(Easing.poly(4))} )
+            translateY: withTiming(currSection.value.scrollerY, {duration: 400, easing: Easing.inOut(Easing.poly(6))} )
         }]}
         ));
 
