@@ -47,55 +47,55 @@ export default function SectionAbout ( {textStyles}) {
             <Text style={[textStyles.sectionTitle, {alignSelf: 'flex-start'}]}>skills</Text>
             </View>
             <View style={styles.skillsContainer}>
-                <Skill order={ 1} size={42}
+                <Skill order={ 1} size={4}
                     label={'Unity'}
                     icon={'logo-unity'}/>
-                <Skill order={ 6} size={36}
+                <Skill order={ 6} size={3}
                     label={'Unreal Engine 5'}
                     icon={'logo-unreal'}/>
-                <Skill order={ 3} size={42}
+                <Skill order={ 3} size={4}
                     label={'TouchDesigner'}
                     icon={'logo-td'}/>
-                <Skill order={ 5} size={36}
+                <Skill order={ 5} size={3}
                     label={'GLSL'} 
                     icon={'logo-glsl'}/>
-                <Skill order={ 4} size={36}
+                <Skill order={ 4} size={3}
                     label={'Shader Graph'} 
                     icon={'logo-shadergraph'}/>
-                <Skill order={ 7} size={36}
+                <Skill order={ 7} size={3}
                     label={'VFX Graph'} 
                     icon={'logo-vfxgraph'}/>
-                <Skill order={ 2} size={42}
+                <Skill order={ 2} size={4}
                     label={'Blender'} 
                     icon={'logo-blender'}/>
-                <Skill order={ 8} size={36}
+                <Skill order={ 8} size={3}
                     label={'Python'}              
                     icon={'logo-python'}/>
-                <Skill order={99} size={36}
+                <Skill order={99} size={3}
                     label={'C#'}
                     icon={'logo-csharp'}/>
-                <Skill order={ 9} size={36}
+                <Skill order={ 9} size={3}
                     label={'Figma'}               
                     icon={'logo-figma'}/>
-                <Skill order={99} size={28}
+                <Skill order={99} size={2}
                     label={'Illustrator'}         
                     icon={'logo-illustrator'}/>
-                <Skill order={99} size={28}
+                <Skill order={99} size={2}
                     label={'Photoshop'}           
                     icon={'logo-photoshop'}/>
-                <Skill order={99} size={28}
+                <Skill order={99} size={2}
                     label={'Maya'}                
                     icon={'logo-maya'}/>
-                <Skill order={99} size={28}
+                <Skill order={99} size={2}
                     label={'Substance Painter'}   
                     icon={'logo-painter'}/>
-                <Skill order={99} size={28}
+                <Skill order={99} size={2}
                     label={'ZBrush'}              
                     icon={'logo-zbrush'}/>
-                <Skill order={99} size={28}
+                <Skill order={99} size={2}
                     label={'JavaScript'}          
                     icon={'logo-js'}/>
-                <Skill order={99} size={28}
+                <Skill order={99} size={2}
                     label={'Java'}               
                     icon={'logo-java'}/>
             </View>
@@ -108,8 +108,8 @@ function Skill ({label, order, icon, textStyles, size}) {
     return (
         <View style={[styles.skillBox, {order: order}]}>
             {/* <FontAwesome5 name={icon} size={styles.skillsLabel.fontSize}/> */}
-            <Image style={[styles.svgImage, {width: size * 0.9, height: size * 0.9}]} source={require(`../assets/svg/${icon}.svg`)}/>
-            <Text style={[styles.skillsLabel, {width: 'auto', margin:0, padding:0, fontSize: `min(${size}pt, ${size/23}vw)`, lineHeight: `min(${size * 0.88}pt, ${size * 0.88 / 23}vw)`}]}>{label}</Text>
+            <Image style={[styles.svgImage, {width: `${size * 0.9}vmin`, height: `${size * 0.9}vmin`}]} source={require(`../assets/svg/${icon}.svg`)}/>
+            <Text style={[styles.skillsLabel, {width: 'auto', margin:0, padding:0, fontSize: `${size / 2}vw`, lineHeight: `${size / 3}vw`}]}>{label}</Text>
         </View>
     );
 }
@@ -158,16 +158,16 @@ const styles = StyleSheet.create({
         flexFlow: 'row wrap',
        // alignItems: 'stretch',
         justifyContent: 'center',
-        gap: 10,
-        paddingHorizontal: '2vh',
+        gap: '1vmin',
+        paddingHorizontal: '2vmin',
         alignItems: 'flex-start',
         width: '100%',
     },
     skillBox: {
         borderWidth: 3,
         borderColor: 'black',
-        borderRadius: 15,
-        padding: 10,
+        borderRadius: 'max(10px, 1.8vmin)',
+        padding: '1vmin',
         //flex: 1,
         flexShrink: 2,
         flexBasis: 'content',
