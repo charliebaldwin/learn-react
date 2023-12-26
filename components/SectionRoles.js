@@ -68,7 +68,7 @@ function Role ({textStyles, title, date, company, body, url}) {
     return (
         <View style={styles.roleContainer}>
         <View style={styles.topBar}>
-            <View style={{flex: 2, paddingTop: '.5vw'}}>
+            <View style={{flex: 2, paddingTop: '.5vw', gap: '.5vmin'}}>
             <Text style={[textStyles.label, {width: 'auto'}]}>{title}</Text>
             <Text style={[textStyles.sublabel]}>{date}</Text>
             </View>
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     topBar: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom: '1vmin',
 
         borderColor: 'red',
         borderWidth: 0,

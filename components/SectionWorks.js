@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Pressable} from 'react-native';
+import {Image, StyleSheet, View, Text, Pressable} from 'react-native';
 import Animated, {useAnimatedStyle, useSharedValue, Easing, withTiming} from 'react-native-reanimated';
 import { Ionicons }  from '@expo/vector-icons'
 import ScrollSection from './ScrollSection';
@@ -23,7 +23,7 @@ export default function SectionWorks ({textStyles, onPressWork}) {
                 <Work title={'project 1'} onPress={showModal} />
                 <Work title={'project 2'} onPress={showModal}/>
                 <Work title={'project 3'} onPress={showModal}/>
-                <Work title={'project 4'} onPress={showModal}/>
+                <Work title={'sailing symphony'} image={'sailing-symphony.png'}onPress={showModal}/>
             </View>
 
             <Text style={textStyles.label}>group 2</Text>
@@ -38,7 +38,7 @@ export default function SectionWorks ({textStyles, onPressWork}) {
     );
 }
 
-function Work ({title, onPress}) {
+function Work ({title, onPress, image}) {
 
     const shadowSmall = 0.8;
     const shadowLarge = 2;
@@ -57,6 +57,7 @@ function Work ({title, onPress}) {
 
 
 
+
     return (
         <AnimatedPressable 
             style={[styles.work, animStyle_shadow]}
@@ -70,9 +71,7 @@ function Work ({title, onPress}) {
             onPressIn={() => { setShadow(shadowSmall * 0.5) }}
             onPressOut={()=> { setShadow(shadowLarge) }}
         >
-            <View style={styles.workButton}>
-
-            </View>
+            <Image style={styles.workButton} source={image == null ? require('../assets/media/empty.png') : require(`../assets/media/${image}`)}/>
             
             <Text style={styles.workLabel}>{title}</Text>
         </AnimatedPressable>
